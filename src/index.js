@@ -1,10 +1,15 @@
 import React from 'react';
-import {View} from 'react-native';
+import {StatusBar} from 'react-native';
+import Routes from './routes';
 
-// import { Container } from './styles';
-
-const src = () => {
-  return <View />;
+const App = () => {
+  return (
+    <>
+      {/* formatando a a cor da status bar */}
+      <StatusBar barStyle="dark-content" backgroundColor="#f5f5f5" />
+      <Routes />
+    </>
+  );
 };
 
-export default src;
+export default App;

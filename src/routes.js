@@ -13,11 +13,11 @@ const Routes = createAppContainer(
       Feed,
     },
     {
-      // centralizando o conteudo do header
-      headerLayoutPreset: 'center',
       defaultNavigationOptions: {
+        // centralizando o conteudo do header
+        headerTitleAlign: 'center',
         // Definindo o padrão de cabeçalho
-        headerTitle: <Image source={logo} />,
+        headerTitle: () => <Image source={logo} />,
         // cor de fundo do cabeçalho
         headerStyle: {
           backgroundColor: '#f5f5f5',

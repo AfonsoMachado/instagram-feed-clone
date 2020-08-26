@@ -16,8 +16,9 @@ export default function Feed() {
   const [page, setPage] = useState(1);
   const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
 
-  async function loadPage(pageNumber = page, shouldRefresh) {
+  async function loadPage(pageNumber = page, shouldRefresh = false) {
     if (total && pageNumber > total) {
       return;
     }
@@ -34,7 +35,7 @@ export default function Feed() {
     // Numero de paginas, arredondandos para cima
     setTotal(Math.floor(totalItems / 5));
     // incrementando dados no feet ao inves de substituir os dados
-    setFeed([...feed, ...data]);
+    setFeed(shouldRefresh ? data : [...feed, ...data]);
     setPage(pageNumber + 1);
     setLoading(false);
   }
@@ -42,6 +43,14 @@ export default function Feed() {
   useEffect(() => {
     loadPage();
   }, []);
+
+  async function refreshList() {
+    setRefreshing(true);
+
+    await loadPage(1);
+
+    setRefreshing(false);
+  }
 
   return (
     <View>
@@ -54,6 +63,8 @@ export default function Feed() {
         onEndReachedThreshold={0.1}
         // ultimo item da lista
         ListFooterComponent={loading && <Loading />}
+        onRefresh={refreshList}
+        refreshing={refreshing}
         renderItem={({item}) => (
           <Post>
             <Header>

@@ -7,7 +7,8 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "serve": "json-server server.json -d 1000 -w"
   },
   "dependencies": {
     "react": "16.13.1",
@@ -20,6 +21,7 @@
     "babel-jest": "^26.3.0",
     "eslint": "^7.7.0",
     "jest": "^26.4.2",
+    "json-server": "^0.16.1",
     "metro-react-native-babel-preset": "^0.63.0",
     "react-test-renderer": "16.13.1"
   },

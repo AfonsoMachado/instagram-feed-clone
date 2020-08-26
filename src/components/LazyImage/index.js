@@ -6,6 +6,7 @@ import {Small, Original} from './styles';
 const OriginalAmimated = Animated.createAnimatedComponent(Original);
 
 export default function LazyImage({smallSource, source, aspectRatio}) {
+  const opacity = new Animated.Value(0);
   // se a imagem original foi carregada ou nao
   const [loaded, setLoaded] = useState(false);
 
@@ -16,7 +17,13 @@ export default function LazyImage({smallSource, source, aspectRatio}) {
     }, 1000);
   }, []);
 
-  function handleAnimate() {}
+  function handleAnimate() {
+    Animated.timing(opacity, {
+      duration: 500,
+      toValue: 1,
+      useNativeDriver: true,
+    }).start();
+  }
 
   return (
     <Small
@@ -26,6 +33,7 @@ export default function LazyImage({smallSource, source, aspectRatio}) {
       blurRadius={2}>
       {loaded && (
         <OriginalAmimated
+          style={{opacity}}
           source={source}
           ratio={aspectRatio}
           resizeMode="contain"

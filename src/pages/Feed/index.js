@@ -33,7 +33,7 @@ export default function Feed() {
               <Name>{item.author.name}</Name>
             </Header>
 
-            <PostImage source={{uti: item.image}} />
+            <PostImage ratio={item.aspectRatio} source={{uri: item.image}} />
 
             <Description>
               <Name>{item.author.name}</Name> {item.description}

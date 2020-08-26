@@ -15,7 +15,7 @@ export default function LazyImage({
   // se a imagem original foi carregada ou nao
   const [loaded, setLoaded] = useState(false);
 
-  // Dando um intervalode 1 segundo para visualizar o carregamento da imagem
+  // Dando um intervalo de 1 segundo para visualizar o carregamento da imagem
   useEffect(() => {
     if (shouldLoad) {
       setTimeout(() => {

@@ -14,7 +14,8 @@ export default function Feed() {
     // convertendo os dados em json
     const data = await resp.json();
     // armazenando os dados
-    setFeed(data);
+    // incrementando dados no feet ao inves de substituir os dados
+    setFeed([...feed, ...data]);
     setPage(pageNumber + 1);
   }
 

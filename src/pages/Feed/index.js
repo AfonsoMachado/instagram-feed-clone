@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 import {View, FlatList} from 'react-native';
 
 import LazyImage from '../../components/LazyImage';
@@ -11,6 +11,7 @@ export default function Feed() {
   const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
+  const [viewable, setViewable] = useState([]);
 
   async function loadPage(pageNumber = page, shouldRefresh = false) {
     if (total && pageNumber > total) {
@@ -46,6 +47,11 @@ export default function Feed() {
     setRefreshing(false);
   }
 
+  // funçãop que nao é carregada sempre que o estado de alguma variavel useState muda, ja fica salva
+  const handleViewableChanged = useCallback(({changed}) => {
+    setViewable(changed.map(({item}) => item.id));
+  }, []);
+
   return (
     <View>
       {/* Estrutura do componente a ser listado */}
@@ -60,6 +66,7 @@ export default function Feed() {
         // refresh arrastando o conteudos para baixo
         onRefresh={refreshList}
         refreshing={refreshing}
+        onViewableItemsChanged={handleViewableChanged}
         renderItem={({item}) => (
           <Post>
             <Header>
@@ -68,6 +75,7 @@ export default function Feed() {
             </Header>
 
             <LazyImage
+              shouldLoad={viewable.includes(item.id)}
               aspectRatio={item.aspectRatio}
               source={{uri: item.image}}
               smallSource={{uri: item.small}}

@@ -5,17 +5,24 @@ import {Small, Original} from './styles';
 
 const OriginalAmimated = Animated.createAnimatedComponent(Original);
 
-export default function LazyImage({smallSource, source, aspectRatio}) {
+export default function LazyImage({
+  smallSource,
+  source,
+  aspectRatio,
+  shouldLoad,
+}) {
   const opacity = new Animated.Value(0);
   // se a imagem original foi carregada ou nao
   const [loaded, setLoaded] = useState(false);
 
   // Dando um intervalode 1 segundo para visualizar o carregamento da imagem
   useEffect(() => {
-    setTimeout(() => {
-      setLoaded(true);
-    }, 1000);
-  }, []);
+    if (shouldLoad) {
+      setTimeout(() => {
+        setLoaded(true);
+      }, 1000);
+    }
+  }, [shouldLoad]);
 
   function handleAnimate() {
     Animated.timing(opacity, {

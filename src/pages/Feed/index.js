@@ -47,7 +47,7 @@ export default function Feed() {
   async function refreshList() {
     setRefreshing(true);
 
-    await loadPage(1);
+    await loadPage(1, true);
 
     setRefreshing(false);
   }

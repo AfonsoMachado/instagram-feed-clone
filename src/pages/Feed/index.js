@@ -57,6 +57,7 @@ export default function Feed() {
         onEndReachedThreshold={0.1}
         // ultimo item da lista
         ListFooterComponent={loading && <Loading />}
+        // refresh arrastando o conteudos para baixo
         onRefresh={refreshList}
         refreshing={refreshing}
         renderItem={({item}) => (

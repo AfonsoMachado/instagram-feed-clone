@@ -7,18 +7,17 @@ export default function Feed() {
   const [feed, setFeed] = useState([]);
 
   useEffect(() => {
+    const url = 'http://localhost:3000/feed?_expand=author&_limit=5&_page=1';
     // Carregando os itens do feed do backend
     async function loadFeed() {
-      const resp = await fetch(
-        'http://localhost:3000/feed?_expand=author&_limit=5&_page=1',
-      );
-
+      const resp = await fetch(url);
       // convertendo os dados em json
       const data = await resp.json();
-
       // armazenando os dados
       setFeed(data);
     }
+
+    loadFeed();
   }, []);
 
   return (

@@ -4,4 +4,5 @@ Clone da interface gráfica do feed de notícias do Instagram, implementado em R
 reconhecendo localhost:3000 com android
 adb reverse tcp:3000 tcp:3000
 
+executando app: yarn android
 executando server: yarn run serve

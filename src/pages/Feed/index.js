@@ -6,14 +6,23 @@ import {Post, Header, Avatar, Name, PostImage, Description} from './styles';
 export default function Feed() {
   const [feed, setFeed] = useState([]);
   const [page, setPage] = useState(1);
+  const [total, setTotal] = useState(0);
 
   async function loadPage(pageNumber = page, shootRefresh) {
+    if (total && pageNumber > total) {
+      return;
+    }
+
     const url = `http://localhost:3000/feed?_expand=author&_limit=5&_page=${pageNumber}`;
     // Carregando os itens do feed do backend
     const resp = await fetch(url);
     // convertendo os dados em json
     const data = await resp.json();
+    // Capturando total de elementos
+    const totalItems = resp.headers.get('X-Total_Count');
     // armazenando os dados
+    // Numero de paginas, arredondandos para cima
+    setTotal(Math.floor(totalItems / 5));
     // incrementando dados no feet ao inves de substituir os dados
     setFeed([...feed, ...data]);
     setPage(pageNumber + 1);

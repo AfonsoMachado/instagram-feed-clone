@@ -48,9 +48,15 @@ export default function Feed() {
   }
 
   // funçãop que nao é carregada sempre que o estado de alguma variavel useState muda, ja fica salva
-  const handleViewableChanged = useCallback(({changed}) => {
+  // const handleViewableChanged = useCallback(({changed}) => {
+  //   setViewable(changed.map(({item}) => item.id));
+  // }, []);
+
+  const onViewRef = React.useRef(({changed}) => {
     setViewable(changed.map(({item}) => item.id));
-  }, []);
+  });
+
+  const viewConfigRef = React.useRef({viewAreaCoveragePercentThreshold: 20});
 
   return (
     <View>
@@ -66,7 +72,8 @@ export default function Feed() {
         // refresh arrastando o conteudos para baixo
         onRefresh={refreshList}
         refreshing={refreshing}
-        onViewableItemsChanged={handleViewableChanged}
+        onViewableItemsChanged={onViewRef.current}
+        viewabilityConfig={viewConfigRef.current}
         renderItem={({item}) => (
           <Post>
             <Header>

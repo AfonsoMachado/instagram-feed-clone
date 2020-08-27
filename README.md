@@ -53,6 +53,8 @@ $ adb reverse tcp:3000 tcp:3000
 
 ![](https://github.com/AfonsoMachado/instagram-feed-clone/blob/master/result.gif)
 
+---
+
 <p align="center">Feito com 💜 por <strong><a href="https://www.linkedin.com/in/AfonsoMachado/">Afonso Machado</a> 🥰 </strong> </p>
 
 
